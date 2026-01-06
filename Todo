@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task List</title>
+body{
+  background: #0a74da;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container{
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+}
+
+#taskInput{
+  width: 70%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  outline: none;
+}
+
+#addBtn{
+  padding: 10px 20px;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.task{
+  display: flex;
+  justify-content: space-between;
+  background: #c7e8eb;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.deleteBtn{
+  background: #1a73e8;
+  border: none;
+  padding: 7px 10px;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</head>
+<body>
+
+<div class="container">
+  <input type="text" id="taskInput" placeholder="Write your task..." />
+  <button id="addBtn">Add</button>
+
+  <div id="taskList"></div>
+</div>
+
+<script>
+const input = document.getElementById("taskInput");
+const addBtn = document.getElementById("addBtn");
+const taskList = document.getElementById("taskList");
+
+
+addBtn.addEventListener("click", addTask);
+
+
+function addTask(){
+  if(input.value.trim() === ""){
+    alert("Write something first!");
+    return;
+  }
+
+  const taskDiv = document.createElement("div");
+  taskDiv.className = "task";
+
+  const taskText = document.createElement("p");
+  taskText.textContent = input.value
+
+  const delBtn = document.createElement("button");
+  delBtn.textContent = "🗑️";
+  delBtn.className = "deleteBtn";
+  delBtn.addEventListener("click", () => {
+    taskDiv.remove();
+  });
+
+  taskDiv.appendChild(taskText);
+  taskDiv.appendChild(delBtn);
+  taskList.appendChild(taskDiv);
+
+  input.value = "";
+}
+</script>
+</body>
+</html>
